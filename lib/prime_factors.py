@@ -12,8 +12,6 @@ def prime_factor(num):
         raise TypeError("Number must be Integer.")
     res = []
     i = 2
-    if num < 2:
-        return []
 
     while num > 1:
         while num % i == 0:
