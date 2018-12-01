@@ -1,3 +1,6 @@
+"""
+Test for prime factors
+"""
 import pytest as _pytest
 
 import lib.prime_factors as _pf
@@ -16,6 +19,9 @@ import lib.prime_factors as _pf
     ]
 )
 def test_prime_factor(num, res):
+    """
+    Test the calculation of prime_factor
+    """
     assert _pf.prime_factor(num) == res
 
 
@@ -23,4 +29,7 @@ def test_prime_factor(num, res):
     "num", ["", 2.1]
 )
 def test_prime_factors_invalid(num):
+    """
+    Test the given parameter to prime_factor
+    """
     assert _pytest.raises(TypeError, "_pf.prime_factor({0})".format(num))

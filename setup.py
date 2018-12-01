@@ -16,5 +16,9 @@ setup(
         "pandas",
         "pdfminer",
         "sqlalchemy",
+        "click",
+    ],
+    test_requires=[
+        "pytest",
     ]
 )
