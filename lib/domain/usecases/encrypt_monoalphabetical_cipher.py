@@ -23,6 +23,9 @@ class EncryptMono(_encrypt.AbstractEncryption):
         """
         Constructor
         """
+        if not password:
+            raise TypeError("Bitte ein Passwort eingeben")
+
         self.password = password
         self.sign = sign
         self.text = text
