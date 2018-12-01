@@ -17,6 +17,7 @@ setup(
         "pdfminer",
         "sqlalchemy",
         "click",
+        "pyPdf",
     ],
     test_requires=[
         "pytest",
