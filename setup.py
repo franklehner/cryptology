@@ -16,5 +16,6 @@ setup(
         "pandas",
         "pdfminer",
         "sqlalchemy",
+        "click",
     ]
 )
