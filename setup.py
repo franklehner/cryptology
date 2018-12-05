@@ -18,6 +18,8 @@ setup(
         "sqlalchemy",
         "click",
         "pyPdf",
+        "sqlalchemy",
+        "psycopg2",
     ],
     test_requires=[
         "pytest",
