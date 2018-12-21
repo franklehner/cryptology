@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Text for encryption of a monoalphabetical text
+Test for encryption of a monoalphabetical text
 """
 
 
