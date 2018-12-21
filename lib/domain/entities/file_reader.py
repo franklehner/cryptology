@@ -9,7 +9,7 @@ Read file
 import abc as _abc
 
 
-class Reader(object):
+class AbstractReader(object):
     """
     Base class for file reader
     """

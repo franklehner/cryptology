@@ -8,10 +8,10 @@ Read the exif files
 
 import os as _os
 
-from lib.domain.entities.file_reader import Reader
+import lib.domain.entities.file_reader as _file_reader
 
 
-class EXIF(Reader):
+class EXIF(_file_reader.AbstractReader):
     """
     Exif class
     """
