@@ -34,4 +34,7 @@ def test_file_does_not_exist():
     Test invalid filename
     """
     filename = "foo.txt"
-    assert _pytest.raises(IOError, "_txt_file.TextFileReader(filename='{0}')".format(filename))
+    assert _pytest.raises(
+        IOError,
+        "_txt_file.TextFileReader(filename='{0}')".format(filename)
+    )
