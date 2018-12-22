@@ -13,7 +13,7 @@ def test_constructor_valid_filename():
     """
     Test the constructor
     """
-    filename = "data/sample_text.txt"
+    filename = "data/1026778984.txt"
     text_reader = _txt_file.TextFileReader(filename)
     assert filename == text_reader.filename
 
