@@ -34,7 +34,7 @@ class EncryptMono(_encrypt.AbstractEncryption):
         """
         Encrypt method
         """
-        pass
+        return
 
     def make_unique(self):
         """
