@@ -36,3 +36,17 @@ def test_make_password_unique(password, sign, result):
     mono = _emc.EncryptMono(password, sign, text)
     password_unique = mono.make_unique()
     assert password_unique == result
+
+
+def test_encrypt_text():
+    """
+    Test the encryption of a text
+    """
+    text = "abcdefghijklmnopqrstuvwxyz"
+    password = "geheimschrift"
+    sign = "e"
+    mono = _emc.EncryptMono(password, sign, text)
+    encrypted_text = mono.encrypt()
+    expected = "wxyzgehimscrftabdjklnopquv"
+    assert len(expected) == 26
+    assert encrypted_text == expected
