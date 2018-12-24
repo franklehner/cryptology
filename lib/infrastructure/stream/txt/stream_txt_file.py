@@ -33,7 +33,9 @@ class TextFileReader(_file_reader.AbstractReader):
         """
         read text file
         """
-        return
+        with open(self.filename) as text_file:
+            text = text_file.read()
+        return text
 
     def write(self):
         """
