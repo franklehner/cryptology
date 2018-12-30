@@ -6,6 +6,7 @@ encrpyt_monoalphabetical_cipher.py
 
 import re as _re
 import lib.domain.entities.encrypt as _encrypt
+import lib.domain.usecases.caesar_chiffre as _caesar
 
 
 class EncryptMono(_encrypt.AbstractEncryption):
@@ -27,6 +28,7 @@ class EncryptMono(_encrypt.AbstractEncryption):
             raise TypeError("Bitte ein Passwort eingeben")
 
         self.password = password
+        self.password = self.make_unique()
         self.sign = sign
         self.text = text
 
@@ -34,7 +36,10 @@ class EncryptMono(_encrypt.AbstractEncryption):
         """
         Encrypt method
         """
-        return
+        char_map = _caesar.EncryptCaesar.create_char_map()
+        char_number = char_map[self.sign]
+        caesar_text = _caesar.EncryptCaesar(self.text, key=char_number)
+        return caesar_text.encrypt()
 
     def make_unique(self):
         """
