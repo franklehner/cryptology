@@ -45,22 +45,26 @@ class EncryptCaesar(_encrypt.AbstractEncryption):
 
         return encrypted_text
 
-    def create_char_map(self):
+    @classmethod
+    def create_char_map(cls):
         """
         char_map
         """
+        alphabet = _string.lowercase + " "
         char_map = {
-            key: i+1 for i, key in enumerate(self.ALPHABET) if key != " "
+            key: i+1 for i, key in enumerate(alphabet) if key != " "
         }
         char_map["z"] = 0
         return char_map
 
-    def create_inverse_map(self):
+    @classmethod
+    def create_inverse_map(cls):
         """
         create inverse map
         """
+        alphabet = _string.lowercase + " "
         inverse_char_map = {
-            i+1: char for i, char in enumerate(self.ALPHABET) if char != " "
+            i+1: char for i, char in enumerate(alphabet) if char != " "
         }
         inverse_char_map[0] = "z"
         inverse_char_map.pop(26, None)
