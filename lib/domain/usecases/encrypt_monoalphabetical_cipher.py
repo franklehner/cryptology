@@ -5,6 +5,8 @@ encrpyt_monoalphabetical_cipher.py
 
 
 import re as _re
+import string as _string
+import collections as _collections
 import lib.domain.entities.encrypt as _encrypt
 import lib.domain.usecases.caesar_chiffre as _caesar
 
@@ -55,3 +57,20 @@ class EncryptMono(_encrypt.AbstractEncryption):
 
         password = "".join(signs)
         return _re.sub(r"\W", "", password.lower().replace("-", ""))
+
+    def create_key(self):
+        """
+        create key
+        """
+        queue = _collections.deque()
+        alphabet = _caesar.EncryptCaesar.ALPHABET
+        alphabet = "".join(
+            [char for char in alphabet.strip() if char not in self.password]
+        )
+        alphabet = self.password + alphabet
+        for char in alphabet:
+            queue.append(char)
+        rotate = _string.lowercase.find(self.sign)
+        queue.rotate(rotate)
+        key = "".join(list(queue))
+        return key
