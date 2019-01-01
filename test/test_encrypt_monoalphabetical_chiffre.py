@@ -50,3 +50,49 @@ def test_create_key():
     expected = "wxyzgehimscrftabdjklnopquv"
     assert len(expected) == 26
     assert encrypted_text == expected
+
+
+@_pytest.mark.parametrize(
+    "alpha_char,key_char", [
+        ("a", "w"),
+        ("b", "x"),
+        (" ", " "),
+        ("e", "g")
+    ]
+)
+def test_create_charmap(alpha_char, key_char):
+    """
+    test create charmap
+    """
+    text = get_text()
+    password = "geheimschrift"
+    sign = "e"
+    key = "wxyzgehimscrftabdjklnopquv"
+    mono = _emc.EncryptMono(password, sign, text)
+    char_map = mono.create_charmap(key)
+    assert isinstance(char_map, dict)
+    assert len(char_map) == 27
+    assert char_map[alpha_char] == key_char
+
+
+@_pytest.mark.parametrize(
+    "text,expected", [
+        ("a", "w"),
+        ("b", "x"),
+        ("ab", "wx"),
+        ("ab ef", "wx ge"),
+        ("efgfhijkglhmn", "geheimschrift"),
+        ("ö", "ag"),
+        ("ü", "ng"),
+        ("ß", "kk")
+    ]
+)
+def test_encrypt(text, expected):
+    """
+    test enrypt
+    """
+    password = "geheimschrift"
+    sign = "e"
+    mono = _emc.EncryptMono(password, sign, text)
+    encrypted_text = mono.encrypt()
+    assert encrypted_text == expected
