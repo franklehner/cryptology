@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 encrpyt_monoalphabetical_cipher.py
 ==================================
@@ -35,11 +36,35 @@ class EncryptMono(_encrypt.AbstractEncryption):
             raise TypeError("Bitte ein Passwort eingeben")
         self.password = self.make_unique()
 
+    @text.validator
+    def validate_text(self, attribute, value): #pylint: disable=unused-argument
+        """
+        validate it text is a string
+        """
+        special_signs = {
+            "ä": "ae",
+            "ö": "oe",
+            "ü": "ue",
+            "ß": "ss",
+        }
+        if not isinstance(self.text, (unicode, str)):
+            raise TypeError("Text is not instance of unicode or string")
+        for key, val in special_signs.items():
+            self.text = self.text.replace(key, val)
+
     def encrypt(self):
         """
         Encrypt method
         """
-        return
+        key = self.create_key()
+        charmap = self.create_charmap(key)
+        encrypted_text = ""
+        for token in self.text: #pylint: disable=not-an-iterable
+            if token not in charmap:
+                continue
+            encrypted_text += charmap[token]
+
+        return encrypted_text
 
     def make_unique(self):
         """
@@ -72,3 +97,13 @@ class EncryptMono(_encrypt.AbstractEncryption):
         queue.rotate(rotate)
         key = "".join(list(queue))
         return key
+
+    @classmethod
+    def create_charmap(cls, key):
+        """
+        create charmap
+        """
+        alphabet = _string.lowercase + " "
+        key += " "
+        char_map = {key: val for key, val in zip(alphabet, key)}
+        return char_map
