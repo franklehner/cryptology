@@ -7,10 +7,11 @@ encrpyt_monoalphabetical_cipher.py
 import re as _re
 import string as _string
 import collections as _collections
+import attr as _attr
 import lib.domain.entities.encrypt as _encrypt
-import lib.domain.usecases.caesar_chiffre as _caesar
 
 
+@_attr.s
 class EncryptMono(_encrypt.AbstractEncryption):
     """
     Encrypt monoalphabetical cipher
@@ -22,26 +23,23 @@ class EncryptMono(_encrypt.AbstractEncryption):
             one char for password start
     """
 
-    def __init__(self, password, sign, text):
+    password = _attr.ib()
+    sign = _attr.ib()
+    text = _attr.ib()
+    @password.validator
+    def unify_password(self, attribute, value): #pylint: disable=unused-argument
         """
-        Constructor
+        unify password
         """
-        if not password:
+        if not value:
             raise TypeError("Bitte ein Passwort eingeben")
-
-        self.password = password
         self.password = self.make_unique()
-        self.sign = sign
-        self.text = text
 
     def encrypt(self):
         """
         Encrypt method
         """
-        char_map = _caesar.EncryptCaesar.create_char_map()
-        char_number = char_map[self.sign]
-        caesar_text = _caesar.EncryptCaesar(self.text, key=char_number)
-        return caesar_text.encrypt()
+        return
 
     def make_unique(self):
         """
@@ -63,9 +61,9 @@ class EncryptMono(_encrypt.AbstractEncryption):
         create key
         """
         queue = _collections.deque()
-        alphabet = _caesar.EncryptCaesar.ALPHABET
+        alphabet = _string.lowercase
         alphabet = "".join(
-            [char for char in alphabet.strip() if char not in self.password]
+            [char for char in alphabet if char not in self.password]
         )
         alphabet = self.password + alphabet
         for char in alphabet:
