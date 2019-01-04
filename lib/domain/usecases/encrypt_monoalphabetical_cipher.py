@@ -2,6 +2,9 @@
 """
 encrpyt_monoalphabetical_cipher.py
 ==================================
+
+This program is for encrypting a monoalphabetical chiffre with a password
+and a sign.
 """
 
 
@@ -18,10 +21,27 @@ class EncryptMono(_encrypt.AbstractEncryption):
     Encrypt monoalphabetical cipher
 
     Attributes:
-        - password string
+        - password: string
             Password for the alphabet
-        - sign char
+        - sign char: string
             one char for password start
+        - text: string
+            this is the text you want to encrypt
+    methods:
+        - unify_password
+            if the user forgot to choose a password with unique characters
+            this method will make it unique
+        - validate_text
+            validates that the text is string or unicode
+        - encrypt
+            encrypts the given text
+        - make_unique
+            unifies the character in the given password
+        - create_key
+            takes the regular alphabet with the password and the sign
+            and creates a new alphabet which is the key for the encryption
+        - create_charmap
+            maps the regular alphabet with the key
     """
 
     password = _attr.ib()
@@ -30,7 +50,14 @@ class EncryptMono(_encrypt.AbstractEncryption):
     @password.validator
     def unify_password(self, attribute, value): #pylint: disable=unused-argument
         """
-        unify password
+        Checks if a password is given. If there is a password this method
+        processes a method which makes the characters in the password unique
+        if they are not.
+
+        Params:
+        =======
+            - attribute
+            - value
         """
         if not value:
             raise TypeError("Bitte ein Passwort eingeben")
@@ -39,7 +66,13 @@ class EncryptMono(_encrypt.AbstractEncryption):
     @text.validator
     def validate_text(self, attribute, value): #pylint: disable=unused-argument
         """
-        validate it text is a string
+        Check if the text is instance of string or unicode. Further special
+        signs are converted in regular signs if possible
+
+        Params:
+        =======
+            - attribute
+            - value
         """
         special_signs = {
             "ä": "ae",
@@ -54,7 +87,9 @@ class EncryptMono(_encrypt.AbstractEncryption):
 
     def encrypt(self):
         """
-        Encrypt method
+        Encrypts the text monoalphabetical (not save)
+
+        Returns an encrypted text
         """
         key = self.create_key()
         charmap = self.create_charmap(key)
@@ -83,7 +118,13 @@ class EncryptMono(_encrypt.AbstractEncryption):
 
     def create_key(self):
         """
-        create key
+        Replace in the regular alphabet the character (sign) and the
+        following characters with the password and start the begin of
+        the regular alphabet at the end of the password. And rotates
+        the alphabet. For the decryption it is important that the characters
+        in the key are also unique.
+
+        Returns the key
         """
         queue = _collections.deque()
         alphabet = _string.lowercase
@@ -101,7 +142,13 @@ class EncryptMono(_encrypt.AbstractEncryption):
     @classmethod
     def create_charmap(cls, key):
         """
-        create charmap
+        Maps the regular alphabet with the key
+
+        Params:
+        =======
+            - key: string or unicode
+
+        Returns a dict with the mapping
         """
         alphabet = _string.lowercase + " "
         key += " "
