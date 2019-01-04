@@ -11,7 +11,7 @@ import os as _os
 import lib.domain.entities.file_reader as _file_reader
 
 
-class EXIF(_file_reader.AbstractReader):
+class EXIF(_file_reader.AbstractFileIO):
     """
     Exif class
     """
