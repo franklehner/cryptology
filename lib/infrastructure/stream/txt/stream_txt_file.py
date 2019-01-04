@@ -13,7 +13,7 @@ import lib.domain.entities.file_reader as _file_reader
 
 
 @_attr.s
-class TextFileReader(_file_reader.AbstractReader):
+class TextFile(_file_reader.AbstractFileIO):
     """
     Open text files
     """
