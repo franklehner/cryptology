@@ -7,6 +7,7 @@ Test for encryption of a monoalphabetical text
 import pytest as _pytest
 
 import lib.domain.usecases.encrypt_monoalphabetical_cipher as _emc
+import lib.app.encrypt_monoalphabetical_cipher as _mono
 
 
 def get_text():

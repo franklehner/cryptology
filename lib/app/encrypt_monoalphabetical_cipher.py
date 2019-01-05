@@ -6,18 +6,16 @@ This script is the real client
 """
 
 
-import os as _os
+import attr as _attr
 
 
+@_attr.s
 class FileHandler(object):
     """
     Findout the filetype and open it
     """
-    def __init__(self, filename):
-        """
-        Constructor
-        """
-        self.filename = filename
+
+    filename = _attr.ib()
 
     def specify_filetype(self):
         """
