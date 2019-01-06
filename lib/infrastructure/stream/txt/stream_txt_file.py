@@ -18,16 +18,6 @@ class TextFile(_file_stream.AbstractFileIO):
     Open text files
     """
     filename = _attr.ib()
-    @filename.validator
-    def validate_filename(self, attribute, value): #pylint: disable=unused-argument
-        """
-        validate filename
-        """
-        if value == self.filename:
-            pass
-
-        if not value.endswith(".txt"):
-            raise TypeError("Please use txt file")
 
     def read(self):
         """
