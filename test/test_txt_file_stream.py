@@ -22,31 +22,6 @@ def create_text(multiline=False):
     return text
 
 
-def test_constructor_valid_filename():
-    """
-    Test the constructor
-    """
-    filename = "data/1026778984.txt"
-    text_file = _txt_file.TextFile(filename)
-    assert filename == text_file.filename
-
-
-@_pytest.mark.parametrize(
-    "filename", [
-        "data/1026778984.pdf",
-        "data/1026778984.gz"
-    ]
-)
-def test_wrong_file_type(filename):
-    """
-    Test the wrong file type
-    """
-    assert _pytest.raises(
-        TypeError,
-        "_txt_file.TextFile(filename='{0}')".format(filename)
-    )
-
-
 def test_file_does_not_exist():
     """
     Test invalid filename
