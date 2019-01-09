@@ -97,3 +97,19 @@ def test_encrypt(text, expected):
     mono = _emc.EncryptMono(password, sign, text)
     encrypted_text = mono.encrypt()
     assert encrypted_text == expected
+
+@_pytest.mark.parametrize(
+    ("filename", "filetype"), [
+        ("foo.txt", "txt"),
+        (u"foo.txt", "txt"),
+        ("foo.pdf", "pdf"),
+        (u"foo.pdf", "pdf")
+    ]
+)
+def test_specify_filetype(filename, filetype):
+    """
+    test file type
+    """
+    file_handler = _mono.FileHandler(filename)
+    result_type = file_handler.specify_filetype()
+    assert result_type == filetype
