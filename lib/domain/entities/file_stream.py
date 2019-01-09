@@ -23,7 +23,7 @@ class AbstractFileIO(object):
         pass
 
     @_abc.abstractmethod
-    def write(self, text):
+    def write(self, filename, text):
         """
         write method
         """

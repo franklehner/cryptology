@@ -72,8 +72,10 @@ class PDFFile(_file_stream.AbstractFileIO):
 
         return text.strip()
 
-    def write(self, text):
+    def write(self, filename, text):
         """
         write pdf file
         """
-        pass
+        with open(filename, "w") as file_stream:
+            for line in text:
+                file_stream.write(line)

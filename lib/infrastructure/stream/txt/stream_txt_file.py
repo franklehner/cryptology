@@ -30,10 +30,10 @@ class TextFile(_file_stream.AbstractFileIO):
             text = text_file.read()
         return text
 
-    def write(self, text):
+    def write(self, filename, text):
         """
         write text file
         """
-        with open(self.filename, "w") as file_stream:
+        with open(filename, "w") as file_stream:
             for line in text:
                 file_stream.write(line)
