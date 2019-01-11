@@ -110,6 +110,6 @@ def test_specify_filetype(filename, filetype):
     """
     test file type
     """
-    file_handler = _mono.FileHandler(filename)
+    file_handler = _mono.Encrypter(filename)
     result_type = file_handler.specify_filetype()
     assert result_type == filetype
