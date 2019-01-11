@@ -19,8 +19,8 @@ import lib.app.encrypt_monoalphabetical_cipher as _encrypter
 @_click.option("--password", "-p", required=True, help="Specify the password")
 @_click.option("--sign", "-s", required=True, help="Specify the sign")
 @_click.option("--filename", "-f", required=True, help="Specify file with text")
-@_click.option("--out_file", "-o", required=True, help="Specify out file")
-def cli(password, sign, filename, out_file):
+@_click.option("--outfile", "-o", required=True, help="Specify out file")
+def cli(password, sign, filename, outfile):
     """
     Encrypt monoaphetically
     Params:
@@ -31,7 +31,7 @@ def cli(password, sign, filename, out_file):
     encrypter = _encrypter.Encrypter(filename)
     text = encrypter.get_text()
     encrypted_text = encrypter.encrypt(password, sign, text)
-    encrypter.write(out_file, encrypted_text)
+    encrypter.write(outfile, encrypted_text)
 
 
 if __name__ == "__main__":
