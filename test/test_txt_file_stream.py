@@ -57,7 +57,7 @@ def test_write_file(multiline):
     filename = "/tmp/foo.txt"
     text = create_text(multiline)
     text_file = _txt_file.TextFile(filename)
-    text_file.write(text)
+    text_file.write(filename, text)
     assert _os.path.exists(filename)
     with open(filename) as file_stream:
         text_stream = file_stream.read().strip()
