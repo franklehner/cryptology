@@ -11,6 +11,7 @@ and a sign.
 import re as _re
 import string as _string
 import collections as _collections
+import pandas as _pd
 import attr as _attr
 import lib.domain.entities.encrypt as _encrypt
 
@@ -82,6 +83,7 @@ class EncryptMono(_encrypt.AbstractEncryption):
         }
         if not isinstance(self.text, (unicode, str)):
             raise TypeError("Text is not instance of unicode or string")
+        self.text = self.text.lower()
         for key, val in special_signs.items():
             self.text = self.text.replace(key, val)
 
@@ -91,15 +93,10 @@ class EncryptMono(_encrypt.AbstractEncryption):
 
         Returns an encrypted text
         """
-        key = self.create_key()
-        charmap = self.create_charmap(key)
-        encrypted_text = ""
-        for token in self.text: #pylint: disable=not-an-iterable
-            if token not in charmap:
-                continue
-            encrypted_text += charmap[token]
+        text_frame = _pd.DataFrame({"words": self.text.split()})
+        text_frame["encrypted"] = text_frame["words"].map(self.make_encryption)
 
-        return encrypted_text
+        return " ".join(list(text_frame["encrypted"]))
 
     def make_unique(self):
         """
@@ -154,3 +151,18 @@ class EncryptMono(_encrypt.AbstractEncryption):
         key += " "
         char_map = {key: val for key, val in zip(alphabet, key)}
         return char_map
+
+    def make_encryption(self, text):
+        """
+        make_encryption
+        """
+        key = self.create_key()
+        charmap = self.create_charmap(key)
+        encrypted_text = ""
+
+        for token in text:
+            if token not in charmap:
+                continue
+            encrypted_text += charmap[token]
+
+        return encrypted_text
