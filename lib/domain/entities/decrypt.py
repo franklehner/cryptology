@@ -7,7 +7,7 @@ decrypt.py
 import abc as _abc
 
 
-class AbstractDecryption(object):
+class AbstractDecrypter(object):
     """
     Abstract class for decryption
     """
