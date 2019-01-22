@@ -5,6 +5,7 @@ char_frequency.py
 
 
 import attr as _attr
+import collections as _collections
 
 import lib.domain.entities.char_frequency as _char_frequency
 
@@ -21,4 +22,11 @@ class Frequency(_char_frequency.AbstractCharFrequency):
         """
         get_ngrams
         """
-        pass
+        ngrams = _collections.defaultdict(int)
+
+        for i, _ in enumerate(self.text):
+            ngrams[self.text[i:i+n]] += 1
+
+        ngrams = {key: val for key, val in ngrams.iteritems() if len(key) == n}
+
+        return ngrams
