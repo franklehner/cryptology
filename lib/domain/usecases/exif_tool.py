@@ -7,42 +7,41 @@ Read the exif files
 
 
 import os as _os
+import json as _json
 
-import lib.domain.entities.file_stream as _file_stream
 
-
-class EXIF(_file_stream.AbstractFileIO):
+class EXIF(object):
     """
     Exif class
     """
-    def __init__(self, path, outfile=None):
-        """
-        Constructor
-        """
-        pass
 
-    def read(self):
+    def fetch_all(self, path):
         """
         read file
         """
-        pass
+        info = _os.popen("exiftool -j {0}".format(path))
+        return _json.loads(info.read())
 
-    def write(self):
+    def write(self, outfile):
         """
         write file
         """
         pass
-
-    def verify_path(self):
-        """
-        verifies that the path exists
-
-        Returns path exists
-        """
-        return
 
     def fetch_gps_data(self):
         """
         Fetch only gps data from file
         """
         return
+
+    def update_date(self, path, delta):
+        """
+        update file
+        """
+        _os.popen('exiftool "-AllDates-=0:0:{delta} 0:0:0" {path}'.format(delta=delta, path=path))
+
+    def calculate_delta(self, old_date, new_date):
+        """
+        Calculate the delta between two timestamps
+        """
+        return (new_date - old_date).days
