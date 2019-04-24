@@ -15,12 +15,12 @@ import lib.infrastructure.stream.pdf.stream_pdf_file as _pdf_file
 
 
 @_attr.s
-class Encrypter(object):
+class Encrypter:
     """
     Findout the filetype and open it
     """
 
-    filename = _attr.ib(type=[str, unicode])
+    filename = _attr.ib(type=str)
 
     FILETYPE_MAPPING = {
         "txt": _txt_file.TextFile,

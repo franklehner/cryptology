@@ -49,7 +49,7 @@ class Decrypter(_decrypt.AbstractDecrypter):
         """
         check text
         """
-        if not isinstance(self.text, (unicode, str)):
+        if not isinstance(self.text, str):
             raise TypeError("Text is not instance of unicode or string")
 
     def decrypt(self):
@@ -80,7 +80,7 @@ class Decrypter(_decrypt.AbstractDecrypter):
         create_key
         """
         queue = _collections.deque()
-        alphabet = _string.lowercase
+        alphabet = _string.ascii_lowercase
         alphabet = "".join(
             [char for char in alphabet if char not in self.password]
         )
@@ -90,7 +90,7 @@ class Decrypter(_decrypt.AbstractDecrypter):
         for char in alphabet:
             queue.append(char)
 
-        rotate = _string.lowercase.find(self.sign)
+        rotate = _string.ascii_lowercase.find(self.sign)
         queue.rotate(rotate)
         key = "".join(list(queue))
 
@@ -101,7 +101,7 @@ class Decrypter(_decrypt.AbstractDecrypter):
         """
         create char map
         """
-        alphabet = _string.lowercase + " "
+        alphabet = _string.ascii_lowercase + " "
         key += " "
         char_map = {val: key for key, val in zip(alphabet, key)}
 

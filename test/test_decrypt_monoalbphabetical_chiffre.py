@@ -34,7 +34,7 @@ def test_create_key():
     """
     Test the key
     """
-    text = _string.lowercase
+    text = _string.ascii_lowercase
     password = "geheimschrift"
     sign = "e"
     decrypter = _decrypter.Decrypter(password=password, sign=sign, text=text)
@@ -55,7 +55,7 @@ def test_create_charmap(key_char, alpha_char):
     """
     test_create_charmap
     """
-    text = _string.lowercase
+    text = _string.ascii_lowercase
     password = "geheimschrift"
     sign = "e"
     key = "wxyzgehimscrftabdjklnopquv"

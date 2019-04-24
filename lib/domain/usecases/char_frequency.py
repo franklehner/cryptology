@@ -27,6 +27,6 @@ class Frequency(_char_frequency.AbstractCharFrequency):
         for i, _ in enumerate(self.text):
             ngrams[self.text[i:i+n]] += 1
 
-        ngrams = {key: val for key, val in ngrams.iteritems() if len(key) == n}
+        ngrams = {key: val for key, val in ngrams.items() if len(key) == n}
 
         return ngrams

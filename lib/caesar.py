@@ -21,7 +21,7 @@ class Caesar(object):
         - decrypt_caesar
     """
 
-    ALPHABET = _string.lowercase + " "
+    ALPHABET = _string.ascii_lowercase + " "
 
     def __init__(self, text):
         """

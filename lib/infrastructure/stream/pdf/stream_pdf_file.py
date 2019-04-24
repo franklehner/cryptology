@@ -6,7 +6,7 @@ stream_pdf_file.pdf
 
 import os as _os
 
-from cStringIO import StringIO as _StringIO
+from io import StringIO as _StringIO
 import attr as _attr
 from pdfminer.pdfinterp import PDFResourceManager as _PDFResourceManager
 from pdfminer.pdfinterp import PDFPageInterpreter as _PDFPageInterpreter
@@ -42,7 +42,7 @@ class PDFFile(_file_stream.AbstractFileIO):
             laparams=_LAParams()
         )
 
-        stream = file(self.filename, "rb")
+        stream = open(self.filename, "rb")
         interpreter = _PDFPageInterpreter(rsrcmgr, device)
 
         try:

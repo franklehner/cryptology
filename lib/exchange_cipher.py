@@ -23,7 +23,7 @@ class ExchangeCipher(object):
         - get_allowed_multiplicators
     """
 
-    ALPHABET = _string.lowercase + " "
+    ALPHABET = _string.ascii_lowercase + " "
 
     def __init__(self, text):
         """

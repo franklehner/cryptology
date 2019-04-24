@@ -41,8 +41,8 @@ def test_read_text():
     text_file = _txt_file.TextFile(filename=filename)
     text = text_file.read()
     assert text
-    assert isinstance(text, (str, unicode))
-    assert len(text) == 393566
+    assert isinstance(text, str)
+    assert len(text) == 385408
 
 @_pytest.mark.parametrize(
     "multiline", [

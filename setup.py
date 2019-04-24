@@ -14,7 +14,7 @@ setup(
     install_requires=[
         "numpy",
         "pandas",
-        "pdfminer",
+        "pdfminer.six",
         "sqlalchemy",
         "click",
         "pyPdf",

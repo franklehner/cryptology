@@ -8,7 +8,7 @@ encrypt.py
 import abc as _abc
 
 
-class AbstractEncryption(object):
+class AbstractEncryption:
     """
     Abstract class for Encryption
     """
@@ -19,4 +19,4 @@ class AbstractEncryption(object):
         """
         Abstract method encrypt
         """
-        pass
+        raise NotImplementedError
