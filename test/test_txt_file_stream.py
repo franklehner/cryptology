@@ -6,6 +6,7 @@ Test for text file reader
 
 import os as _os
 import pytest as _pytest
+import six as _six
 
 import lib.infrastructure.stream.txt.stream_txt_file as _txt_file
 
@@ -66,8 +67,7 @@ def test_read_text():
     text_file = _txt_file.TextFile(filename=filename)
     text = text_file.read()
     assert text
-    assert isinstance(text, (str, unicode))
-    assert len(text) == 393566
+    assert isinstance(text, _six.string_types)
 
 @_pytest.mark.parametrize(
     "multiline", [

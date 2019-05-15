@@ -14,7 +14,7 @@ class EncryptCaesar(_encrypt.AbstractEncryption):
     Encrypt caesar
     """
 
-    ALPHABET = _string.lowercase + " "
+    ALPHABET = _string.ascii_lowercase + " "
 
     def __init__(self, text, key=0):
         """
@@ -50,7 +50,7 @@ class EncryptCaesar(_encrypt.AbstractEncryption):
         """
         char_map
         """
-        alphabet = _string.lowercase + " "
+        alphabet = _string.ascii_lowercase + " "
         char_map = {
             key: i+1 for i, key in enumerate(alphabet) if key != " "
         }
@@ -62,7 +62,7 @@ class EncryptCaesar(_encrypt.AbstractEncryption):
         """
         create inverse map
         """
-        alphabet = _string.lowercase + " "
+        alphabet = _string.ascii_lowercase + " "
         inverse_char_map = {
             i+1: char for i, char in enumerate(alphabet) if char != " "
         }
