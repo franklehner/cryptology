@@ -19,14 +19,14 @@ def get_options():
     Get options from commandline
     """
     parser = argparse.ArgumentParser(
-        description="Options for image meta data fetcher"
+        description="Options for image meta data fetcher",
     )
 
     parser.add_argument(
         "-p",
         "--path",
         type=str,
-        help="specify path (directory or file)"
+        help="specify path (directory or file)",
     )
 
     parser.add_argument(
@@ -34,19 +34,19 @@ def get_options():
         "--outfile",
         type=str,
         default="data/exif_data.kml",
-        help="specify path for outfile"
+        help="specify path for outfile",
     )
 
     options = parser.parse_args()
 
     if not (options.path and os.path.exists(options.path)):
-        print "Usage: python script/image_exifdata_fetcher.py -p <path>"
+        print("Usage: python script/image_exifdata_fetcher.py -p <path>")
         exit(1)
 
     return options
 
 
-class Script(object):
+class Script:
     """
     Main class for this Script
     """
@@ -62,7 +62,6 @@ class Script(object):
         """
         gps = EXIF(self.options.path).fetch_gps_data()
         self.write_kml_file(gps)
-
 
     def write_kml_file(self, exif_data):
         """

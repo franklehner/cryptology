@@ -10,7 +10,7 @@ import os
 import json
 
 
-class EXIF(object):
+class EXIF:
     """
     Fetch exif data with linux exiftool
 
@@ -56,7 +56,7 @@ class EXIF(object):
         if not self.__verify_path():
             raise RuntimeError("Path does not exist!")
         info = os.popen(
-            "exiftool -gpslatitude -gpslongitude -j -n %s" % self.path
+            "exiftool -gpslatitude -gpslongitude -j -n %s" % self.path,
         )
         return json.loads(info.read())
 
@@ -70,7 +70,7 @@ class EXIF(object):
         return (sec/60 + minute) / 60 + deg
 
 
-class KML(object):
+class KML:
     """
     Class KML
     """
