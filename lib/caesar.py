@@ -94,7 +94,8 @@ class Caesar(object):
         Create a char map of the alphabet
         """
         char_map = {
-            i+1: self.ALPHABET[i] for i, char in enumerate(self.ALPHABET)
+            i + 1: self.ALPHABET[i]
+            for i, char in enumerate(self.ALPHABET)
             if char != " "
         }
         char_map[0] = "z"
@@ -107,7 +108,8 @@ class Caesar(object):
         Create a char map of the alphabet
         """
         char_map = {
-            self.ALPHABET[i]: i+1 for i, char in enumerate(self.ALPHABET)
+            self.ALPHABET[i]: i + 1
+            for i, char in enumerate(self.ALPHABET)
             if char != " "
         }
         char_map["z"] = 0

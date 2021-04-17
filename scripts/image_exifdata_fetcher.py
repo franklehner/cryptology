@@ -7,43 +7,16 @@ fetch Metadata from image and try to get their GPS-data
 """
 
 
-import os
-import argparse
+import os as _os
+import click as _click
 
-from lib.exif_tool import EXIF
-from lib.exif_tool import KML
+import lib.exif_tool as _exif
 
 
-def get_options():
-    """
-    Get options from commandline
-    """
-    parser = argparse.ArgumentParser(
-        description="Options for image meta data fetcher",
-    )
-
-    parser.add_argument(
-        "-p",
-        "--path",
-        type=str,
-        help="specify path (directory or file)",
-    )
-
-    parser.add_argument(
-        "-0",
-        "--outfile",
-        type=str,
-        default="data/exif_data.kml",
-        help="specify path for outfile",
-    )
-
-    options = parser.parse_args()
-
-    if not (options.path and os.path.exists(options.path)):
-        print("Usage: python script/image_exifdata_fetcher.py -p <path>")
-        exit(1)
-
-    return options
+def validate_path(params, ctx, value):
+    if _os.path.exists(value):
+        return value
+    raise RuntimeError(f"Path {value} does not exist")
 
 
 class Script:
@@ -72,5 +45,29 @@ class Script:
         kml.write(self.options.outfile)
 
 
+def get_gps_data(path):
+    pass
+
+
+@_click.command()
+@_click.option(
+    "--path",
+    "-p",
+    type=str,
+    help="specify path (file or directory",
+    callback=validate_path,
+)
+@_click.option(
+    "--outfile",
+    "-o",
+    type=str,
+    help="outfile",
+    default="data/exif_data.kml",
+)
+def cli(path, outfile):
+    print(path)
+    print(outfile)
+
+
 if __name__ == "__main__":
-    Script().run()
+    cli()

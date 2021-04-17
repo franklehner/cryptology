@@ -6,8 +6,8 @@ This tool fetches the exif data from images or pdf-files
 """
 
 
-import os
-import json
+import os as _os
+import json as _json
 
 
 class EXIF:
@@ -68,6 +68,14 @@ class EXIF:
         if not(deg and minute and sec):
             raise RuntimeError("please insert degree, minute and second")
         return (sec/60 + minute) / 60 + deg
+
+
+def fetch_gps_data(path):
+    gps_data = _os.popen(
+        f"exiftool -gpslatitude -gpslongitude -j -n {path}",
+    )
+
+    return _json.loads(gps_data.read())
 
 
 class KML:
