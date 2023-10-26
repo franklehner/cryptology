@@ -20,11 +20,9 @@ class AbstractFileIO(object):
         """
         read method
         """
-        pass
 
     @_abc.abstractmethod
     def write(self, text):
         """
         write method
         """
-        pass
